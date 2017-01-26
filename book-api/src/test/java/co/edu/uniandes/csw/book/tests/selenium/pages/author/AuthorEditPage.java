@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,35 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.tests.selenium.pages.author;
+
+import co.edu.uniandes.csw.book.dtos.minimum.AuthorDTO;
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class AuthorEditPage {
+
+    @FindBy(id = "name")
+    private WebElement nameInput;
+    @FindBy(id = "birthDate")
+    private WebElement birthDateInput;
+
+    @FindBy(id = "save-author")
+    private WebElement saveBtn;
+
+    @FindBy(id = "cancel-author")
+    private WebElement cancelBtn;
+
+    public void saveAuthor(AuthorDTO author) {
+         waitGui().until().element(nameInput).is().visible();
+         nameInput.clear();
+         nameInput.sendKeys(author.getName());
+         waitGui().until().element(birthDateInput).is().visible();
+         birthDateInput.clear();
+         birthDateInput.sendKeys(author.getBirthDate().toString());
+        guardAjax(saveBtn).click();
+    }
+}

@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.tests.selenium.pages.editorial;
+
+import co.edu.uniandes.csw.book.dtos.minimum.EditorialDTO;
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class EditorialEditPage {
+
+    @FindBy(id = "name")
+    private WebElement nameInput;
+
+    @FindBy(id = "save-editorial")
+    private WebElement saveBtn;
+
+    @FindBy(id = "cancel-editorial")
+    private WebElement cancelBtn;
+
+    public void saveEditorial(EditorialDTO editorial) {
+         waitGui().until().element(nameInput).is().visible();
+         nameInput.clear();
+         nameInput.sendKeys(editorial.getName());
+        guardAjax(saveBtn).click();
+    }
+}

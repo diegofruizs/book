@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.api;
+
+import co.edu.uniandes.csw.book.entities.BookEntity;
+import co.edu.uniandes.csw.book.entities.AuthorEntity;
+import java.util.List;
+
+public interface IBookLogic {
+    public int countBooks();
+    public List<BookEntity> getBooks();
+    public List<BookEntity> getBooks(Integer page, Integer maxRecords);
+    public BookEntity getBook(Long id);
+    public BookEntity createBook(BookEntity entity); 
+    public BookEntity updateBook(BookEntity entity);
+    public void deleteBook(Long id);
+    public List<AuthorEntity> listAuthors(Long bookId);
+    public AuthorEntity getAuthors(Long bookId, Long authorsId);
+    public AuthorEntity addAuthors(Long bookId, Long authorsId);
+    public List<AuthorEntity> replaceAuthors(Long bookId, List<AuthorEntity> list);
+    public void removeAuthors(Long bookId, Long authorsId);
+}

@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,34 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+
+(function (ng) {
+
+    var mod = ng.module("editorialModule");
+
+    mod.controller("editorialNewCtrl", ["$scope", "$state", "editorials",
+        function ($scope, $state, editorials) {
+            $scope.currentRecord = {};
+            $scope.actions = {
+                save: {
+                    displayName: 'Save',
+                    icon: 'save',
+                    fn: function () {
+                        if ($scope.editorialForm.$valid) {
+                            editorials.post($scope.currentRecord).then(function (rc) {
+                                $state.go('editorialDetail', {editorialId: rc.id}, {reload: true});
+                            });
+                        }
+                    }
+                },
+                cancel: {
+                    displayName: 'Cancel',
+                    icon: 'remove',
+                    fn: function () {
+                        $state.go('editorialList');
+                    }
+                }
+            };
+        }]);
+})(window.angular);

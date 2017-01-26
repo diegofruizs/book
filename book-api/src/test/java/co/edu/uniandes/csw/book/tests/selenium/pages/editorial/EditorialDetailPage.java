@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,43 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.tests.selenium.pages.editorial;
+
+import co.edu.uniandes.csw.book.dtos.minimum.EditorialDTO;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class EditorialDetailPage {
+
+    @FindBy(id = "delete-editorial")
+    private WebElement deleteBtn;
+
+    @FindBy(id = "edit-editorial")
+    private WebElement editBtn;
+
+    @FindBy(id = "list-editorial")
+    private WebElement listBtn;
+
+    
+    @FindBy(id = "name")
+    private WebElement name;
+
+    public void list() {
+        listBtn.click();
+    }
+
+    public void edit() {
+        editBtn.click();
+    }
+
+    public void delete() {
+        deleteBtn.click();
+    }
+
+    public EditorialDTO getData() {
+        EditorialDTO editorial = new EditorialDTO();        
+        editorial.setName(this.name.getText());        
+        return editorial;
+    }
+}

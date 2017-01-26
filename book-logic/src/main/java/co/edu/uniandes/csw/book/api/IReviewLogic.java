@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.api;
+
+import co.edu.uniandes.csw.book.entities.ReviewEntity;
+import java.util.List;
+
+public interface IReviewLogic {
+    public int countReviews();
+    public List<ReviewEntity> getReviews(Long bookid);
+    public List<ReviewEntity> getReviews(Integer page, Integer maxRecords, Long bookid);
+    public ReviewEntity getReview(Long reviewid);
+    public ReviewEntity createReview(Long bookid, ReviewEntity entity);
+    public ReviewEntity updateReview(Long bookid, ReviewEntity entity);
+    public void deleteReview(Long id);
+}

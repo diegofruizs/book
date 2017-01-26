@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,50 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.dtos.detail;
+
+import co.edu.uniandes.csw.book.dtos.minimum.*;
+import co.edu.uniandes.csw.book.entities.AuthorEntity;
+import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
+
+/**
+ * @generated
+ */
+@XmlRootElement
+public class AuthorDetailDTO extends AuthorDTO{
+
+
+
+    /**
+     * @generated
+     */
+    public AuthorDetailDTO() {
+        super();
+    }
+
+    /**
+     * Crea un objeto AuthorDetailDTO a partir de un objeto AuthorEntity incluyendo los atributos de AuthorDTO.
+     *
+     * @param entity Entidad AuthorEntity desde la cual se va a crear el nuevo objeto.
+     * @generated
+     */
+    public AuthorDetailDTO(AuthorEntity entity) {
+        super(entity);
+        
+    }
+
+    /**
+     * Convierte un objeto AuthorDetailDTO a AuthorEntity incluyendo los atributos de AuthorDTO.
+     *
+     * @return Nueva objeto AuthorEntity.
+     * @generated
+     */
+    @Override
+    public AuthorEntity toEntity() {
+        AuthorEntity entity = super.toEntity();
+        return entity;
+    }
+
+}

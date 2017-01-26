@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+(function (ng) {
+
+    var mod = ng.module("authorModule");
+
+    mod.controller("authorDeleteCtrl", ["$state", "author", function ($state, author) {
+            this.confirmDelete = function () {
+                author.remove().then(function () {
+                    $state.go('authorList', null, {reload: true});
+                });
+            };
+        }]);
+})(window.angular);

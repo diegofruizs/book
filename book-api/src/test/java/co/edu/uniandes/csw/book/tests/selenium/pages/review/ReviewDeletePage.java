@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package co.edu.uniandes.csw.book.tests.selenium.pages.review;
+
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ReviewDeletePage {
+
+    @FindBy(id = "confirm-delete")
+    private WebElement confirmDeleteBtn;
+
+    @FindBy(id = "cancel-delete")
+    private WebElement cancelDeleteBtn;
+
+    public void confirm() {
+        waitGui().until().element(confirmDeleteBtn).is().visible();
+        guardAjax(confirmDeleteBtn).click();
+    }
+
+    public void cancel() {
+        waitGui().until().element(cancelDeleteBtn).is().visible();
+        cancelDeleteBtn.click();
+    }
+}

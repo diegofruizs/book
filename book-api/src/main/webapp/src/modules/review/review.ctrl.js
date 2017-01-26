@@ -1,3 +1,4 @@
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Los Andes University
@@ -19,3 +20,38 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+(function (ng) {
+    var mod = ng.module('reviewModule');
+
+    mod.controller('reviewCtrl', ['$scope', 'model',
+        function ($scope, model) {
+            $scope.model = model;
+            //Alertas
+            $scope.alerts = [];
+            this.closeAlert = function (index) {
+                $scope.alerts.splice(index, 1);
+            };
+
+            /* Función showMessage: Recibe el mensaje en String y
+             * su tipo con el fin de almacenarlo en el array $scope.alerts.
+             */
+            function showMessage(msg, type) {
+                var types = ["info", "danger", "warning", "success"];
+                if (types.some(function (rc) {
+                    return type === rc;
+                })) {
+                    $scope.alerts.push({type: type, msg: msg});
+                }
+            }
+
+            $scope.showError = function (msg) {
+                showMessage(msg, "danger");
+            };
+
+            $scope.showSuccess = function (msg) {
+                showMessage(msg, "success");
+            };
+        }]);
+
+})(window.angular);
