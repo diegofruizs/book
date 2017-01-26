@@ -23,10 +23,8 @@ SOFTWARE.
 */
 package co.edu.uniandes.csw.book.ejbs;
 
-import co.edu.uniandes.csw.book.api.IReviewLogic;
 import co.edu.uniandes.csw.book.entities.ReviewEntity;
 import co.edu.uniandes.csw.book.persistence.ReviewPersistence;
-import co.edu.uniandes.csw.book.api.IBookLogic;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -37,12 +35,12 @@ import javax.persistence.NoResultException;
  * @generated
  */
 @Stateless
-public class ReviewLogic implements IReviewLogic {
+public class ReviewLogic {
 
     @Inject private ReviewPersistence persistence;
 
     @Inject
-    private IBookLogic bookLogic;
+    private BookLogic bookLogic;
 
     /**
      * Obtiene el número de registros de Review.
@@ -61,7 +59,7 @@ public class ReviewLogic implements IReviewLogic {
      * @return Colección de objetos de ReviewEntity.
      * @generated
      */
-    @Override
+    
     public List<ReviewEntity> getReviews(Long bookid) {
         BookEntity book = bookLogic.getBook(bookid);
         return book.getReviews();
@@ -77,7 +75,7 @@ public class ReviewLogic implements IReviewLogic {
      * @return Colección de objetos de ReviewEntity.
      * @generated
      */
-    @Override
+    
     public List<ReviewEntity> getReviews(Integer page, Integer maxRecords, Long bookid) {
         return persistence.findAll(page, maxRecords, bookid);
     }
@@ -90,7 +88,7 @@ public class ReviewLogic implements IReviewLogic {
      * @return Instancia de ReviewEntity con los datos del Review consultado.
      * @generated
      */
-    @Override
+    
     public ReviewEntity getReview(Long reviewid) {
         try {
             return persistence.find(reviewid);
@@ -107,7 +105,7 @@ public class ReviewLogic implements IReviewLogic {
      * @return Objeto de ReviewEntity con los datos nuevos y su ID.
      * @generated
      */
-    @Override
+    
     public ReviewEntity createReview(Long bookid, ReviewEntity entity) {
         BookEntity book = bookLogic.getBook(bookid);
         entity.setBook(book);
@@ -123,7 +121,7 @@ public class ReviewLogic implements IReviewLogic {
      * @return Instancia de ReviewEntity con los datos actualizados.
      * @generated
      */
-    @Override
+    
     public ReviewEntity updateReview(Long bookid, ReviewEntity entity) {
         BookEntity book = bookLogic.getBook(bookid);
         entity.setBook(book);
@@ -137,7 +135,7 @@ public class ReviewLogic implements IReviewLogic {
      * @param bookid id del Book el cual es padre del Review.
      * @generated
      */
-    @Override
+    
     public void deleteReview(Long id) {
         ReviewEntity old = getReview(id);
         persistence.delete(old.getId());

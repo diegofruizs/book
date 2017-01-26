@@ -36,7 +36,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.api.IEditorialLogic;
+import co.edu.uniandes.csw.book.ejbs.EditorialLogic;
 import co.edu.uniandes.csw.book.dtos.detail.BookDetailDTO;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ import java.util.ArrayList;
 @Produces(MediaType.APPLICATION_JSON)
 public class EditorialBooksResource {
 
-    @Inject private IEditorialLogic editorialLogic;
+    @Inject private EditorialLogic editorialLogic;
     @Context private HttpServletResponse response;
 
     /**

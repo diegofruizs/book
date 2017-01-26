@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.book.persistence;
 
 import javax.ejb.Stateless;
@@ -28,32 +28,54 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
 import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * @generated
  */
 @Stateless
-public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
+public class AuthorPersistence {
 
-    @PersistenceContext(unitName="bookPU")
+    @PersistenceContext(unitName = "bookPU")
     protected EntityManager em;
 
-    /**
-     * @generated
-     */
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    public AuthorEntity create(AuthorEntity entity) {
+        em.persist(entity);
+        return entity;
     }
 
-    /**
-     * @generated
-     */
-    @Override
-    protected Class<AuthorEntity> getEntityClass() {
-        return AuthorEntity.class;
+    public AuthorEntity update(AuthorEntity entity) {
+        return em.merge(entity);
     }
 
+    public void delete(Long id) {
+        AuthorEntity entity = em.find(AuthorEntity.class, id);
+        em.remove(entity);
+    }
 
+    public AuthorEntity find(Long id) {
+        return em.find(AuthorEntity.class, id);
+    }
+
+    public List<AuthorEntity> findAll() {
+        TypedQuery q = em.createQuery("select u from AuthorEntity u", AuthorEntity.class);
+        return q.getResultList();
+    }
+
+    public int count() {
+        Query count = em.createQuery("select count(u) from AuthorEntity u");
+        return Integer.parseInt(count.getSingleResult().toString());
+    }
+
+    public List<AuthorEntity> findAll(Integer page, Integer maxRecords) {
+        Query q = em.createQuery("select u from AuthorEntity u");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return q.getResultList();
+    }
 
 }

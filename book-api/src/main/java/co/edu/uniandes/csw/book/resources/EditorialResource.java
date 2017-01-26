@@ -38,7 +38,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.api.IEditorialLogic;
+import co.edu.uniandes.csw.book.ejbs.EditorialLogic;
 import co.edu.uniandes.csw.book.dtos.detail.EditorialDetailDTO;
 import co.edu.uniandes.csw.book.entities.EditorialEntity;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class EditorialResource {
 
-    @Inject private IEditorialLogic editorialLogic;
+    @Inject private EditorialLogic editorialLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("limit") private Integer maxRecords;

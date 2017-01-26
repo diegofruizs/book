@@ -36,8 +36,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.api.IAuthorLogic;
 import co.edu.uniandes.csw.book.dtos.detail.BookDetailDTO;
+import co.edu.uniandes.csw.book.ejbs.AuthorLogic;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import java.util.ArrayList;
 /**
@@ -48,7 +48,7 @@ import java.util.ArrayList;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthorBooksResource {
 
-    @Inject private IAuthorLogic authorLogic;
+    @Inject private AuthorLogic authorLogic;
     @Context private HttpServletResponse response;
 
     /**

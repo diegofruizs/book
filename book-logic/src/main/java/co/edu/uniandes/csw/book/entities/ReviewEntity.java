@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.book.entities;
 
 import java.io.Serializable;
@@ -29,13 +29,20 @@ import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @generated
  */
 @Entity
-public class ReviewEntity extends BaseEntity implements Serializable {
+public class ReviewEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 
     private String source;
 
@@ -51,7 +58,7 @@ public class ReviewEntity extends BaseEntity implements Serializable {
      * @return atributo source.
      * @generated
      */
-    public String getSource(){
+    public String getSource() {
         return source;
     }
 
@@ -61,7 +68,7 @@ public class ReviewEntity extends BaseEntity implements Serializable {
      * @param source nuevo valor del atributo
      * @generated
      */
-    public void setSource(String source){
+    public void setSource(String source) {
         this.source = source;
     }
 
@@ -71,7 +78,7 @@ public class ReviewEntity extends BaseEntity implements Serializable {
      * @return atributo description.
      * @generated
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -81,7 +88,7 @@ public class ReviewEntity extends BaseEntity implements Serializable {
      * @param description nuevo valor del atributo
      * @generated
      */
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -103,5 +110,33 @@ public class ReviewEntity extends BaseEntity implements Serializable {
      */
     public void setBook(BookEntity book) {
         this.book = book;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

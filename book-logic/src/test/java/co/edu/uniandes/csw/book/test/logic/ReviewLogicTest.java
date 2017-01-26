@@ -24,7 +24,6 @@ SOFTWARE.
 package co.edu.uniandes.csw.book.test.logic;
 
 import co.edu.uniandes.csw.book.ejbs.ReviewLogic;
-import co.edu.uniandes.csw.book.api.IReviewLogic;
 import co.edu.uniandes.csw.book.entities.ReviewEntity;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import co.edu.uniandes.csw.book.persistence.ReviewPersistence;
@@ -67,7 +66,7 @@ public class ReviewLogicTest {
      * @generated
      */
     @Inject
-    private IReviewLogic reviewLogic;
+    private ReviewLogic reviewLogic;
 
     /**
      * @generated
@@ -98,7 +97,7 @@ public class ReviewLogicTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ReviewEntity.class.getPackage())
                 .addPackage(ReviewLogic.class.getPackage())
-                .addPackage(IReviewLogic.class.getPackage())
+                .addPackage(ReviewLogic.class.getPackage())
                 .addPackage(ReviewPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");

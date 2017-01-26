@@ -24,7 +24,6 @@ SOFTWARE.
 package co.edu.uniandes.csw.book.test.logic;
 
 import co.edu.uniandes.csw.book.ejbs.EditorialLogic;
-import co.edu.uniandes.csw.book.api.IEditorialLogic;
 import co.edu.uniandes.csw.book.entities.EditorialEntity;
 import co.edu.uniandes.csw.book.persistence.EditorialPersistence;
 import co.edu.uniandes.csw.book.entities.BookEntity;
@@ -65,7 +64,7 @@ public class EditorialLogicTest {
      * @generated
      */
     @Inject
-    private IEditorialLogic editorialLogic;
+    private EditorialLogic editorialLogic;
 
     /**
      * @generated
@@ -96,7 +95,7 @@ public class EditorialLogicTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(EditorialEntity.class.getPackage())
                 .addPackage(EditorialLogic.class.getPackage())
-                .addPackage(IEditorialLogic.class.getPackage())
+                .addPackage(EditorialLogic.class.getPackage())
                 .addPackage(EditorialPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
