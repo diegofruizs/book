@@ -24,7 +24,7 @@ SOFTWARE.
 package co.edu.uniandes.csw.book.tests.selenium;
 
 import co.edu.uniandes.csw.book.dtos.minimum.ReviewDTO;
-import co.edu.uniandes.csw.book.resources.ReviewsResource;
+import co.edu.uniandes.csw.book.resources.ReviewResource;
 import co.edu.uniandes.csw.book.tests.selenium.pages.review.ReviewCreatePage;
 import co.edu.uniandes.csw.book.tests.selenium.pages.review.ReviewListPage;
 import co.edu.uniandes.csw.book.tests.selenium.pages.LoginPage;
@@ -84,7 +84,7 @@ public class ReviewIT {
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(ReviewsResource.class.getPackage())
+                .addPackage(ReviewResource.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 // El archivo beans.xml es necesario para injeccion de dependencias.
