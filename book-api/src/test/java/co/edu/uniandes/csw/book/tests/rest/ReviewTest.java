@@ -28,7 +28,7 @@ import co.edu.uniandes.csw.auth.security.JWT;
 import co.edu.uniandes.csw.book.entities.ReviewEntity;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import co.edu.uniandes.csw.book.dtos.detail.ReviewDetailDTO;
-import co.edu.uniandes.csw.book.resources.ReviewResource;
+import co.edu.uniandes.csw.book.resources.ReviewsResource;
 import co.edu.uniandes.csw.book.tests.Utils;
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +96,7 @@ public class ReviewTest {
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(ReviewResource.class.getPackage())
+                .addPackage(ReviewsResource.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 // El archivo beans.xml es necesario para injeccion de dependencias.
