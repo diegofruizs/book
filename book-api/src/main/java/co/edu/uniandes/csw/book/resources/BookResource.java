@@ -38,7 +38,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.ejbs.BookLogic;
+import co.edu.uniandes.csw.book.api.IBookLogic;
 import co.edu.uniandes.csw.book.dtos.detail.BookDetailDTO;
 import co.edu.uniandes.csw.book.entities.BookEntity;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
-    @Inject private BookLogic bookLogic;
+    @Inject private IBookLogic bookLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("limit") private Integer maxRecords;

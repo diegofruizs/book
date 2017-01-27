@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- */
+*/
 package co.edu.uniandes.csw.book.resources;
 
 import java.util.List;
@@ -36,24 +36,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.ejbs.BookLogic;
+import co.edu.uniandes.csw.book.api.IBookLogic;
 import co.edu.uniandes.csw.book.dtos.detail.AuthorDetailDTO;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
 import java.util.ArrayList;
-
 /**
  * URI: books/{booksId: \\d+}/authors
- *
  * @generated
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BookAuthorsResource {
 
-    @Inject
-    private BookLogic bookLogic;
-    @Context
-    private HttpServletResponse response;
+    @Inject private IBookLogic bookLogic;
+    @Context private HttpServletResponse response;
 
     /**
      * Convierte una lista de AuthorEntity a una lista de AuthorDetailDTO.
@@ -62,7 +58,7 @@ public class BookAuthorsResource {
      * @return Lista de AuthorDetailDTO convertida.
      * @generated
      */
-    private List<AuthorDetailDTO> authorsListEntity2DTO(List<AuthorEntity> entityList) {
+    private List<AuthorDetailDTO> authorsListEntity2DTO(List<AuthorEntity> entityList){
         List<AuthorDetailDTO> list = new ArrayList<>();
         for (AuthorEntity entity : entityList) {
             list.add(new AuthorDetailDTO(entity));
@@ -77,7 +73,7 @@ public class BookAuthorsResource {
      * @return Lista de AuthorEntity convertida.
      * @generated
      */
-    private List<AuthorEntity> authorsListDTO2Entity(List<AuthorDetailDTO> dtos) {
+    private List<AuthorEntity> authorsListDTO2Entity(List<AuthorDetailDTO> dtos){
         List<AuthorEntity> list = new ArrayList<>();
         for (AuthorDetailDTO dto : dtos) {
             list.add(dto.toEntity());
@@ -90,8 +86,7 @@ public class BookAuthorsResource {
      * instancia de Book
      *
      * @param booksId Identificador de la instancia de Book
-     * @return Colección de instancias de AuthorDetailDTO asociadas a la
-     * instancia de Book
+     * @return Colección de instancias de AuthorDetailDTO asociadas a la instancia de Book
      * @generated
      */
     @GET
@@ -130,8 +125,7 @@ public class BookAuthorsResource {
      * Remplaza las instancias de Author asociadas a una instancia de Book
      *
      * @param booksId Identificador de la instancia de Book
-     * @param authors Colección de instancias de AuthorDTO a asociar a instancia
-     * de Book
+     * @param authors Colección de instancias de AuthorDTO a asociar a instancia de Book
      * @return Nueva colección de AuthorDTO asociada a la instancia de Book
      * @generated
      */

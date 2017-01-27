@@ -21,39 +21,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package co.edu.uniandes.csw.book.persistence;
+package co.edu.uniandes.csw.book.api;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import co.edu.uniandes.csw.book.entities.AuthorEntity;
-import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
+import co.edu.uniandes.csw.book.entities.EditorialEntity;
+import co.edu.uniandes.csw.book.entities.BookEntity;
+import java.util.List;
 
-/**
- * @generated
- */
-@Stateless
-public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
-
-    @PersistenceContext(unitName="bookPU")
-    protected EntityManager em;
-
-    /**
-     * @generated
-     */
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    /**
-     * @generated
-     */
-    @Override
-    protected Class<AuthorEntity> getEntityClass() {
-        return AuthorEntity.class;
-    }
-
-
-
+public interface IEditorialLogic {
+    public int countEditorials();
+    public List<EditorialEntity> getEditorials();
+    public List<EditorialEntity> getEditorials(Integer page, Integer maxRecords);
+    public EditorialEntity getEditorial(Long id);
+    public EditorialEntity createEditorial(EditorialEntity entity); 
+    public EditorialEntity updateEditorial(EditorialEntity entity);
+    public void deleteEditorial(Long id);
+    public List<BookEntity> listBooks(Long editorialId);
+    public BookEntity getBooks(Long editorialId, Long booksId);
+    public BookEntity addBooks(Long editorialId, Long booksId);
+    public List<BookEntity> replaceBooks(Long editorialId, List<BookEntity> list);
+    public void removeBooks(Long editorialId, Long booksId);
 }

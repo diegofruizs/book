@@ -30,23 +30,14 @@ import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.ArrayList;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 /**
  * @generated
  */
 @Entity
-public class EditorialEntity implements Serializable {
+public class EditorialEntity extends BaseEntity implements Serializable {
 
-    
-        @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    
     @PodamExclude
     @OneToMany(mappedBy = "editorial")
     private List<BookEntity> books = new ArrayList<>();
@@ -69,33 +60,5 @@ public class EditorialEntity implements Serializable {
      */
     public void setBooks(List<BookEntity> books) {
         this.books = books;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 }

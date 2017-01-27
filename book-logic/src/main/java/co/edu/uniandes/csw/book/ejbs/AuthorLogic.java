@@ -23,9 +23,11 @@ SOFTWARE.
 */
 package co.edu.uniandes.csw.book.ejbs;
 
+import co.edu.uniandes.csw.book.api.IAuthorLogic;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
 import co.edu.uniandes.csw.book.persistence.AuthorPersistence;
 import co.edu.uniandes.csw.book.entities.BookEntity;
+import co.edu.uniandes.csw.book.api.IBookLogic;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,12 +37,12 @@ import javax.persistence.NoResultException;
  * @generated
  */
 @Stateless
-public class AuthorLogic {
+public class AuthorLogic implements IAuthorLogic {
 
     @Inject private AuthorPersistence persistence;
 
 
-    @Inject private BookLogic bookLogic;
+    @Inject private IBookLogic bookLogic;
 
     /**
      * Obtiene el número de registros de Author.
@@ -58,7 +60,7 @@ public class AuthorLogic {
      * @return Colección de objetos de AuthorEntity.
      * @generated
      */
-    
+    @Override
     public List<AuthorEntity> getAuthors() {
         return persistence.findAll();
     }
@@ -71,7 +73,7 @@ public class AuthorLogic {
      * @return Colección de objetos de AuthorEntity.
      * @generated
      */
-    
+    @Override
     public List<AuthorEntity> getAuthors(Integer page, Integer maxRecords) {
         return persistence.findAll(page, maxRecords);
     }
@@ -94,7 +96,7 @@ public class AuthorLogic {
      * @return Objeto de AuthorEntity con los datos nuevos y su ID.
      * @generated
      */
-    
+    @Override
     public AuthorEntity createAuthor(AuthorEntity entity) {
         persistence.create(entity);
         return entity;
@@ -107,7 +109,7 @@ public class AuthorLogic {
      * @return Instancia de AuthorEntity con los datos actualizados.
      * @generated
      */
-    
+    @Override
     public AuthorEntity updateAuthor(AuthorEntity entity) {
         return persistence.update(entity);
     }
@@ -118,7 +120,7 @@ public class AuthorLogic {
      * @param id Identificador de la instancia a eliminar.
      * @generated
      */
-    
+    @Override
     public void deleteAuthor(Long id) {
         persistence.delete(id);
     }
@@ -132,7 +134,7 @@ public class AuthorLogic {
      * @return Colección de instancias de BookEntity asociadas a la instancia de Author
      * @generated
      */
-    
+    @Override
     public List<BookEntity> listBooks(Long authorId) {
         return getAuthor(authorId).getBooks();
     }
@@ -144,7 +146,7 @@ public class AuthorLogic {
      * @param booksId Identificador de la instancia de Book
      * @generated
      */
-    
+    @Override
     public BookEntity getBooks(Long authorId, Long booksId) {
         List<BookEntity> list = getAuthor(authorId).getBooks();
         BookEntity booksEntity = new BookEntity();
@@ -164,7 +166,7 @@ public class AuthorLogic {
      * @return Instancia de BookEntity que fue asociada a Author
      * @generated
      */
-    
+    @Override
     public BookEntity addBooks(Long authorId, Long booksId) {
         bookLogic.addAuthors(booksId, authorId);
         return bookLogic.getBook(booksId);
@@ -178,7 +180,7 @@ public class AuthorLogic {
      * @return Nueva colección de BookEntity asociada a la instancia de Author
      * @generated
      */
-    
+    @Override
     public List<BookEntity> replaceBooks(Long authorId, List<BookEntity> list) {
         AuthorEntity authorEntity = getAuthor(authorId);
         List<BookEntity> bookList = bookLogic.getBooks();
@@ -202,7 +204,7 @@ public class AuthorLogic {
      * @param booksId Identificador de la instancia de Book
      * @generated
      */
-    
+    @Override
     public void removeBooks(Long authorId, Long booksId) {
         bookLogic.removeAuthors(booksId, authorId);
     }

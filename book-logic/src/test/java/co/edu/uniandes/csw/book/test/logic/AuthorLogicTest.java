@@ -24,6 +24,7 @@ SOFTWARE.
 package co.edu.uniandes.csw.book.test.logic;
 
 import co.edu.uniandes.csw.book.ejbs.AuthorLogic;
+import co.edu.uniandes.csw.book.api.IAuthorLogic;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
 import co.edu.uniandes.csw.book.persistence.AuthorPersistence;
 import co.edu.uniandes.csw.book.entities.BookEntity;
@@ -64,7 +65,7 @@ public class AuthorLogicTest {
      * @generated
      */
     @Inject
-    private AuthorLogic authorLogic;
+    private IAuthorLogic authorLogic;
 
     /**
      * @generated
@@ -95,7 +96,7 @@ public class AuthorLogicTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(AuthorEntity.class.getPackage())
                 .addPackage(AuthorLogic.class.getPackage())
-                .addPackage(AuthorLogic.class.getPackage())
+                .addPackage(IAuthorLogic.class.getPackage())
                 .addPackage(AuthorPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");

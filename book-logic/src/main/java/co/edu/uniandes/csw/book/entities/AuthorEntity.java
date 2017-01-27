@@ -35,24 +35,14 @@ import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.ArrayList;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 /**
  * @generated
  */
 @Entity
-public class AuthorEntity implements Serializable {
+public class AuthorEntity extends BaseEntity implements Serializable {
 
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-  
-    
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date birthDate;
@@ -99,33 +89,5 @@ public class AuthorEntity implements Serializable {
      */
     public void setBooks(List<BookEntity> books) {
         this.books = books;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 }

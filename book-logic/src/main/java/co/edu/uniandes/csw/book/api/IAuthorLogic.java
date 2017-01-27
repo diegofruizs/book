@@ -21,39 +21,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package co.edu.uniandes.csw.book.persistence;
+package co.edu.uniandes.csw.book.api;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
-import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
+import co.edu.uniandes.csw.book.entities.BookEntity;
+import java.util.List;
 
-/**
- * @generated
- */
-@Stateless
-public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
-
-    @PersistenceContext(unitName="bookPU")
-    protected EntityManager em;
-
-    /**
-     * @generated
-     */
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    /**
-     * @generated
-     */
-    @Override
-    protected Class<AuthorEntity> getEntityClass() {
-        return AuthorEntity.class;
-    }
-
-
-
+public interface IAuthorLogic {
+    public int countAuthors();
+    public List<AuthorEntity> getAuthors();
+    public List<AuthorEntity> getAuthors(Integer page, Integer maxRecords);
+    public AuthorEntity getAuthor(Long id);
+    public AuthorEntity createAuthor(AuthorEntity entity); 
+    public AuthorEntity updateAuthor(AuthorEntity entity);
+    public void deleteAuthor(Long id);
+    public List<BookEntity> listBooks(Long authorId);
+    public BookEntity getBooks(Long authorId, Long booksId);
+    public BookEntity addBooks(Long authorId, Long booksId);
+    public List<BookEntity> replaceBooks(Long authorId, List<BookEntity> list);
+    public void removeBooks(Long authorId, Long booksId);
 }

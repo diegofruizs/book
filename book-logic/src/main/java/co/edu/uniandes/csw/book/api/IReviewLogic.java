@@ -21,39 +21,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package co.edu.uniandes.csw.book.persistence;
+package co.edu.uniandes.csw.book.api;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import co.edu.uniandes.csw.book.entities.AuthorEntity;
-import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
+import co.edu.uniandes.csw.book.entities.ReviewEntity;
+import java.util.List;
 
-/**
- * @generated
- */
-@Stateless
-public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
-
-    @PersistenceContext(unitName="bookPU")
-    protected EntityManager em;
-
-    /**
-     * @generated
-     */
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    /**
-     * @generated
-     */
-    @Override
-    protected Class<AuthorEntity> getEntityClass() {
-        return AuthorEntity.class;
-    }
-
-
-
+public interface IReviewLogic {
+    public int countReviews();
+    public List<ReviewEntity> getReviews(Long bookid);
+    public List<ReviewEntity> getReviews(Integer page, Integer maxRecords, Long bookid);
+    public ReviewEntity getReview(Long reviewid);
+    public ReviewEntity createReview(Long bookid, ReviewEntity entity);
+    public ReviewEntity updateReview(Long bookid, ReviewEntity entity);
+    public void deleteReview(Long id);
 }

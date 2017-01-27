@@ -38,7 +38,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.ejbs.AuthorLogic;
+import co.edu.uniandes.csw.book.api.IAuthorLogic;
 import co.edu.uniandes.csw.book.dtos.detail.AuthorDetailDTO;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
-    @Inject private AuthorLogic authorLogic;
+    @Inject private IAuthorLogic authorLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("limit") private Integer maxRecords;

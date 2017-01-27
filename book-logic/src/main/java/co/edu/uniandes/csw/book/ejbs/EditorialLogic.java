@@ -23,9 +23,11 @@ SOFTWARE.
 */
 package co.edu.uniandes.csw.book.ejbs;
 
+import co.edu.uniandes.csw.book.api.IEditorialLogic;
 import co.edu.uniandes.csw.book.entities.EditorialEntity;
 import co.edu.uniandes.csw.book.persistence.EditorialPersistence;
 import co.edu.uniandes.csw.book.entities.BookEntity;
+import co.edu.uniandes.csw.book.api.IBookLogic;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,12 +37,12 @@ import javax.persistence.NoResultException;
  * @generated
  */
 @Stateless
-public class EditorialLogic{
+public class EditorialLogic implements IEditorialLogic {
 
     @Inject private EditorialPersistence persistence;
 
 
-    @Inject private BookLogic bookLogic;
+    @Inject private IBookLogic bookLogic;
 
     /**
      * Obtiene el número de registros de Editorial.
@@ -58,7 +60,7 @@ public class EditorialLogic{
      * @return Colección de objetos de EditorialEntity.
      * @generated
      */
-    
+    @Override
     public List<EditorialEntity> getEditorials() {
         return persistence.findAll();
     }
@@ -71,7 +73,7 @@ public class EditorialLogic{
      * @return Colección de objetos de EditorialEntity.
      * @generated
      */
-    
+    @Override
     public List<EditorialEntity> getEditorials(Integer page, Integer maxRecords) {
         return persistence.findAll(page, maxRecords);
     }
@@ -94,7 +96,7 @@ public class EditorialLogic{
      * @return Objeto de EditorialEntity con los datos nuevos y su ID.
      * @generated
      */
-    
+    @Override
     public EditorialEntity createEditorial(EditorialEntity entity) {
         persistence.create(entity);
         return entity;
@@ -107,7 +109,7 @@ public class EditorialLogic{
      * @return Instancia de EditorialEntity con los datos actualizados.
      * @generated
      */
-    
+    @Override
     public EditorialEntity updateEditorial(EditorialEntity entity) {
         return persistence.update(entity);
     }
@@ -118,7 +120,7 @@ public class EditorialLogic{
      * @param id Identificador de la instancia a eliminar.
      * @generated
      */
-    
+    @Override
     public void deleteEditorial(Long id) {
         persistence.delete(id);
     }
@@ -132,7 +134,7 @@ public class EditorialLogic{
      * @return Colección de instancias de BookEntity asociadas a la instancia de Editorial
      * @generated
      */
-    
+    @Override
     public List<BookEntity> listBooks(Long editorialId) {
         return getEditorial(editorialId).getBooks();
     }
@@ -144,7 +146,7 @@ public class EditorialLogic{
      * @param booksId Identificador de la instancia de Book
      * @generated
      */
-    
+    @Override
     public BookEntity getBooks(Long editorialId, Long booksId) {
         List<BookEntity> list = getEditorial(editorialId).getBooks();
         BookEntity booksEntity = new BookEntity();
@@ -164,7 +166,7 @@ public class EditorialLogic{
      * @return Instancia de BookEntity que fue asociada a Editorial
      * @generated
      */
-    
+    @Override
     public BookEntity addBooks(Long editorialId, Long booksId) {
         EditorialEntity editorialEntity = getEditorial(editorialId);
         BookEntity booksEntity = bookLogic.getBook(booksId);
@@ -180,7 +182,7 @@ public class EditorialLogic{
      * @return Nueva colección de BookEntity asociada a la instancia de Editorial
      * @generated
      */
-    
+    @Override
     public List<BookEntity> replaceBooks(Long editorialId, List<BookEntity> list) {
         EditorialEntity editorialEntity = getEditorial(editorialId);
         List<BookEntity> bookList = bookLogic.getBooks();
@@ -204,7 +206,7 @@ public class EditorialLogic{
      * @param booksId Identificador de la instancia de Book
      * @generated
      */
-    
+    @Override
     public void removeBooks(Long editorialId, Long booksId) {
         BookEntity entity = bookLogic.getBook(booksId);
         entity.setEditorial(null);

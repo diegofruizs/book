@@ -38,7 +38,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import co.edu.uniandes.csw.book.ejbs.ReviewLogic;
+import co.edu.uniandes.csw.book.api.IReviewLogic;
 import co.edu.uniandes.csw.book.dtos.detail.ReviewDetailDTO;
 import co.edu.uniandes.csw.book.entities.ReviewEntity;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class ReviewsResource {
 
-    @Inject private ReviewLogic reviewLogic;
+    @Inject private IReviewLogic reviewLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("limit") private Integer maxRecords;
