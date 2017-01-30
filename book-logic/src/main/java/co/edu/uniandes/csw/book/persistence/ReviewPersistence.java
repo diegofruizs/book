@@ -20,30 +20,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.book.persistence;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import co.edu.uniandes.csw.book.entities.ReviewEntity;
-import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
 import java.util.List;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
  * @generated
  */
 @Stateless
-public class ReviewPersistence extends CrudPersistence<ReviewEntity> {
+public class ReviewPersistence {
 
-    @PersistenceContext(unitName="bookPU")
+    @PersistenceContext(unitName = "bookPU")
     protected EntityManager em;
 
     /**
      * @generated
      */
-    @Override
     protected EntityManager getEntityManager() {
         return em;
     }
@@ -51,9 +50,86 @@ public class ReviewPersistence extends CrudPersistence<ReviewEntity> {
     /**
      * @generated
      */
-    @Override
     protected Class<ReviewEntity> getEntityClass() {
         return ReviewEntity.class;
+    }
+
+    /**
+     * Retrieves the ammount of records in the database for the handled entity
+     *
+     * @return Number of records of handled entity
+     */
+    public int count() {
+        Query count = getEntityManager().createQuery("select count(u) from ReviewEntity u");
+        return Integer.parseInt(count.getSingleResult().toString());
+    }
+
+    /**
+     * Creates a new record in database for the handled instance
+     *
+     * @param entity Record information
+     * @return New instance of handled entity with it's ID
+     */
+    public ReviewEntity create(ReviewEntity entity) {
+        getEntityManager().persist(entity);
+        return entity;
+    }
+
+    /**
+     * Updates an existing instance of handled entity.
+     *
+     * @param entity Updated instance
+     * @return Updated instance
+     */
+    public ReviewEntity update(ReviewEntity entity) {
+        return getEntityManager().merge(entity);
+    }
+
+    /**
+     * Deletes a record of handled entity from database.
+     *
+     * @param id ID of the record to delete
+     */
+    public void delete(Long id) {
+        ReviewEntity entity = getEntityManager().find(getEntityClass(), id);
+        getEntityManager().remove(entity);
+    }
+
+    /**
+     * Retrieves an instance of handled entity by ID.
+     *
+     * @param id ID of the instance to retrieve
+     * @return Instance of handled entity
+     */
+    public ReviewEntity find(Long id) {
+        return getEntityManager().find(getEntityClass(), id);
+    }
+
+    /**
+     * Retrieves a collection of all instances of handled entity
+     *
+     * @return Colecction of instances of handled entity
+     */
+    public List<ReviewEntity> findAll() {
+        Query q = getEntityManager().createQuery("select u from ReviewEntity u");
+        return q.getResultList();
+    }
+
+    /**
+     * Retrieves a collection of all instances of handled entity allowing
+     * pagination.
+     *
+     * @param page Number of page to retrieve
+     * @param maxRecords Number of records per page
+     * @return Colecction of instances of handled entity
+     */
+    public List<ReviewEntity> findAll(Integer page, Integer maxRecords) {
+        Query q = getEntityManager().createQuery("select u from ReviewEntity u");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return q.getResultList();
     }
 
     public ReviewEntity find(Long bookid, Long reviewid) {
@@ -62,7 +138,7 @@ public class ReviewPersistence extends CrudPersistence<ReviewEntity> {
         q.setParameter("reviewid", reviewid);
         return q.getSingleResult();
     }
-    
+
     public List<ReviewEntity> findAll(Integer page, Integer maxRecords, Long bookid) {
         TypedQuery<ReviewEntity> q = em.createQuery("select p from ReviewEntity p where (p.book.id = :bookid)", ReviewEntity.class);
         q.setParameter("bookid", bookid);
@@ -72,6 +148,5 @@ public class ReviewPersistence extends CrudPersistence<ReviewEntity> {
         }
         return q.getResultList();
     }
-
 
 }

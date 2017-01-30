@@ -27,13 +27,15 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import co.edu.uniandes.csw.book.entities.AuthorEntity;
-import co.edu.uniandes.csw.crud.spi.persistence.CrudPersistence;
+import co.edu.uniandes.csw.book.entities.BookEntity;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  * @generated
  */
 @Stateless
-public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
+public class AuthorPersistence {
 
     @PersistenceContext(unitName="bookPU")
     protected EntityManager em;
@@ -41,7 +43,7 @@ public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
     /**
      * @generated
      */
-    @Override
+    
     protected EntityManager getEntityManager() {
         return em;
     }
@@ -49,9 +51,87 @@ public class AuthorPersistence extends CrudPersistence<AuthorEntity> {
     /**
      * @generated
      */
-    @Override
+    
     protected Class<AuthorEntity> getEntityClass() {
         return AuthorEntity.class;
+    }
+    
+        /**
+     * Retrieves the ammount of records in the database for the handled entity
+     *
+     * @return Number of records of handled entity
+     */
+    public int count() {
+        Query count = getEntityManager().createQuery("select count(u) from AuthorEntity u");
+        return Integer.parseInt(count.getSingleResult().toString());
+    }
+
+    /**
+     * Creates a new record in database for the handled instance
+     *
+     * @param entity Record information
+     * @return New instance of handled entity with it's ID
+     */
+    public AuthorEntity create(AuthorEntity entity) {
+        getEntityManager().persist(entity);
+        return entity;
+    }
+
+    /**
+     * Updates an existing instance of handled entity.
+     *
+     * @param entity Updated instance
+     * @return Updated instance
+     */
+    public AuthorEntity update(AuthorEntity entity) {
+        return getEntityManager().merge(entity);
+    }
+
+    /**
+     * Deletes a record of handled entity from database.
+     *
+     * @param id ID of the record to delete
+     */
+    public void delete(Long id) {
+        AuthorEntity entity = getEntityManager().find(getEntityClass(), id);
+        getEntityManager().remove(entity);
+    }
+
+    /**
+     * Retrieves an instance of handled entity by ID.
+     *
+     * @param id ID of the instance to retrieve
+     * @return Instance of handled entity
+     */
+    public AuthorEntity find(Long id) {
+        return getEntityManager().find(getEntityClass(), id);
+    }
+
+    /**
+     * Retrieves a collection of all instances of handled entity
+     *
+     * @return Colecction of instances of handled entity
+     */
+    public List<AuthorEntity> findAll() {
+        Query q = getEntityManager().createQuery("select u from AuthorEntity u");
+        return q.getResultList();
+    }
+
+    /**
+     * Retrieves a collection of all instances of handled entity allowing
+     * pagination.
+     *
+     * @param page Number of page to retrieve
+     * @param maxRecords Number of records per page
+     * @return Colecction of instances of handled entity
+     */
+    public List<AuthorEntity> findAll(Integer page, Integer maxRecords) {
+        Query q = getEntityManager().createQuery("select u from AuthorEntity u");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return q.getResultList();
     }
 
 
